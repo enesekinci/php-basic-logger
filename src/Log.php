@@ -2,6 +2,7 @@
 
 namespace EnesEkinci\PhpBasicLogger;
 
+use EnesEkinci\PhpBasicLogger\Exception\CreateLogDirectoryError;
 use EnesEkinci\PhpBasicLogger\Exception\CreateLogFileError;
 use EnesEkinci\PhpBasicLogger\Exception\NotFoundDirectory;
 use EnesEkinci\PhpBasicLogger\Exception\WriteLogFileError;
@@ -10,9 +11,14 @@ final class Log
 {
     private static ?string $file = null;
 
-    public function setPath(string $path)
+    public static function setPath(string $path)
     {
         self::$file = $path;
+        if (!file_exists($path)) {
+            $f_create = @mkdir($path, 0755, true);
+            if (!$f_create)
+                throw new CreateLogDirectoryError('Failed to create log path =>' . $path);
+        }
     }
 
     private static function getPath()
@@ -29,7 +35,7 @@ final class Log
         self::$file = static::getPath() . '/log-' . date('Y-m-d') . '.txt';
 
         if (false === file_exists(self::$file)) {
-            $f_open = fopen(self::$file, 'w');
+            $f_open = @fopen(self::$file, 'w');
             if (!$f_open)
                 throw new CreateLogFileError('Failed to create log file =>' . self::$file);
         }
@@ -52,7 +58,7 @@ final class Log
 
     private static function set($data)
     {
-        $log = fopen(self::$file, 'w');
+        $log = @fopen(self::$file, 'w');
 
         if (!$log)
             throw new CreateLogFileError('Unable to open file! =>' . self::$file);
