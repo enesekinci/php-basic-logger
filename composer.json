@@ -1,0 +1,20 @@
+{
+    "name": "enesekinci/php-basic-logger",
+    "description": "a library that saves system logs or caught errors to file and notifies",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "EnesEkinci\\PhpBasicLogger\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "enesekinci",
+            "email": "enes.eknc.96@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.3|^8.0"
+    }
+}
