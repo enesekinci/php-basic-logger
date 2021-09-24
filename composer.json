@@ -3,6 +3,7 @@
     "description": "a library that saves system logs or caught errors to file and notifies",
     "type": "library",
     "license": "MIT",
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "EnesEkinci\\PhpBasicLogger\\": "src/"
