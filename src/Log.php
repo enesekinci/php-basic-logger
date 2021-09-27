@@ -19,6 +19,7 @@ final class Log
             if (!$f_create)
                 throw new CreateLogDirectoryError('Failed to create log path =>' . $path);
         }
+        self::$file .=  '/log-' . date('Y-m-d') . '.txt';
     }
 
     private static function getPath()
@@ -32,8 +33,6 @@ final class Log
 
     private static function getLog()
     {
-        self::$file = static::getPath() . '/log-' . date('Y-m-d') . '.txt';
-
         if (false === file_exists(self::$file)) {
             $f_open = @fopen(self::$file, 'w');
             if (!$f_open)
