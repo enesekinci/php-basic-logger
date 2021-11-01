@@ -35,8 +35,9 @@ final class Log
     {
         if (false === file_exists(self::$file)) {
             $f_open = @fopen(self::$file, 'w');
-            if (!$f_open)
+            if (!$f_open) {
                 throw new CreateLogFileError('Failed to create log file =>' . self::$file);
+            }
         }
 
         $content = file_get_contents(self::$file);
