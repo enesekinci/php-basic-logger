@@ -1,5 +1,7 @@
 # php-basic-logger
 
+## composer require enesekinci/php-basic-logger
+
 ```php
 <?php
 
